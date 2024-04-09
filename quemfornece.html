@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuemFornece - Sistema de Fornecedores</title>
+    <link rel="stylesheet" href="quemfornece.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="logo_quemfornece.png" alt="Logo da empresa" class="logo">
+        </div>
+        <form id="fornecedor-form">
+            <input type="text" id="nome" placeholder="Nome do fornecedor" required>
+            <input type="text" id="local" placeholder="Local do fornecedor" required>
+            <input type="text" id="contato" placeholder="Número para contato" required>
+            <textarea id="descricao" placeholder="Descrição"></textarea>
+            <button type="submit">Adicionar Fornecedor</button>
+        </form>
+        <div id="fornecedores-lista">
+            <h2 id="h2">Fornecedores</h2>
+            <ol id="lista-fornecedores">
+            </ol>
+        </div>
+    </div>
+    
+    <script src="quemfornece.js"></script>
+</body>
+</html>
