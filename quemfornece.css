@@ -81,3 +81,7 @@ li:last-child {
     cursor: pointer;
 }
 
+.botao-add-fornecedor:hover {
+    background-color: #19871e;
+}
+
