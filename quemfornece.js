@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $(document).ready(function(){
         $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
-        $('#contato').mask('(00) 0000-0000');
+        $('#contato').mask('(00) 00000-0000');
     });
 
     const fornecedorForm = document.getElementById('fornecedor-form');
@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
             <strong>${nome}</strong> - ${local}<br>
             Contato: ${contato}<br>
             Descrição: ${descricao}
-            <button class="remover-fornecedor">Remover</button>
+            <button class="remover-fornecedor">
+                <i class="fas fa-trash-alt"></i></button>
         `;
         listaFornecedores.appendChild(fornecedorItem);
     }
