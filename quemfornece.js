@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     $(document).ready(function(){
         $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
         $('#contato').mask('(00) 00000-0000');
+        $('#cep').mask('00000-000');
     });
 
     const fornecedorForm = document.getElementById('fornecedor-form');
@@ -27,8 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <strong>${nome}</strong> - ${local}<br>
             Contato: ${contato}<br>
             Descrição: ${descricao}
-            <button class="remover-fornecedor">
-                <i class="fas fa-trash-alt"></i></button>
+            <button class="remover-fornecedor"><i class="fas fa-trash-alt"></i></button>
         `;
         listaFornecedores.appendChild(fornecedorItem);
     }
@@ -39,4 +38,36 @@ document.addEventListener('DOMContentLoaded', function () {
             fornecedorItem.remove();
         }
     });
+
+    document.getElementById('cep').addEventListener('blur', function() {
+        const cep = this.value.replace(/\D/g, '');
+
+        if (cep.length !== 8) {
+            alert('CEP inválido');
+            return;
+        }
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.erro) {
+                    alert('CEP não encontrado');
+                } else {
+                    document.getElementById('local').value = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o endereço:', error);
+                alert('Erro ao buscar o endereço. Por favor, tente novamente mais tarde.');
+            });
+    });
+    document.getElementById('ver-no-maps').addEventListener('click', function() {
+        const endereco = document.getElementById('local').value;
+        const enderecoFormatado = encodeURIComponent(endereco);
+        const urlGoogleMaps = `https://www.google.com/maps/search/?api=1&query=${enderecoFormatado}`;
+
+        // Abre uma nova aba ou janela do navegador com o endereço no Google Maps
+        window.open(urlGoogleMaps, '_blank');
+    });
+    
 });
